@@ -4,7 +4,7 @@ WIP gem to parse TaxPub documents such as those produced by Pensoft Publishers, 
 
 TaxPub Background: https://www.ncbi.nlm.nih.gov/books/NBK47081/
 
-== Building (before publishing to RubyGems.org)
+== Building
 
     $ gem build taxpub.gemspec
     $ gem install taxpub-0.0.1.gem
