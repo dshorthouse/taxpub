@@ -3,6 +3,7 @@ require "taxpub/validator"
 require "taxpub/version"
 require "nokogiri"
 require "open-uri"
+require "byebug"
 
 class Taxpub
 
@@ -66,7 +67,7 @@ class Taxpub
 
   def doi
     Validator.validate_nokogiri(@doc)
-    "https://doi.org/" + @doc.xpath("//*/article-meta/article-id[@pub-id-type='doi']").text
+    expand_doi(@doc.xpath("//*/article-meta/article-id[@pub-id-type='doi']").text)
   end
 
   def title
@@ -77,7 +78,7 @@ class Taxpub
 
   def abstract
     Validator.validate_nokogiri(@doc)
-    a = @doc.xpath("//*/article-meta/abstract/p").text
+    a = @doc.xpath("//*/article-meta/abstract/*/p").text
     clean_text(a)
   end
 
@@ -119,12 +120,31 @@ class Taxpub
     clean_text(author)
   end
 
+  def reference_dois
+    Validator.validate_nokogiri(@doc)
+    ext_link = @doc.xpath("//*/ref-list/ref/*/ext-link[@ext-link-type='doi']")
+                   .map(&:text)
+                   .map{ |a| expand_doi(a) }
+    pub_id = @doc.xpath("//*/ref-list/ref/*/pub-id[@pub-id-type='doi']")
+                 .map(&:text)
+                 .map{ |a| expand_doi(a) }
+    (ext_link + pub_id).uniq
+  end
+
   private
+
   def clean_text(text)
     text.encode("UTF-8", :undef => :replace, :invalid => :replace, :replace => " ")
         .gsub(/[[:space:]]/, " ")
         .split
         .join(" ")
+  end
+
+  def expand_doi(doi)
+    if doi[0..2] == "10."
+      doi.prepend("https://doi.org/")
+    end
+    doi
   end
 
 end
