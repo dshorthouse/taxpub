@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//TaxonX//DTD Taxonomic Treatment Publishing DTD v0 20100105//EN" "../../nlm/tax-treatment-NS0.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tp="http://www.plazi.org/taxpub" article-type="research-article">
+  <front>
+    <journal-meta>
+      <journal-id journal-id-type="pmc">Proceedings of TDWG</journal-id>
+      <journal-id journal-id-type="publisher-id">Proceedings of TDWG</journal-id>
+      <journal-title-group>
+        <journal-title xml:lang="en">Proceedings of TDWG</journal-title>
+        <abbrev-journal-title xml:lang="en">TDWGProc</abbrev-journal-title>
+      </journal-title-group>
+      <issn pub-type="epub">2535-0897</issn>
+      <publisher>
+        <publisher-name>Pensoft Publishers</publisher-name>
+      </publisher>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="publisher-id">Proceedings of TDWG</article-id>
+      <article-id pub-id-type="doi">10.3897/tdwgproceedings.1.19829</article-id>
+      <article-id pub-id-type="other">7859</article-id>
+      <article-categories>
+        <subj-group subj-group-type="heading">
+          <subject>Conference Abstract</subject>
+        </subj-group>
+        <subj-group subj-group-type="conference-part">
+          <subject>24 Other Oral Presentations</subject>
+        </subj-group>
+      </article-categories>
+      <title-group>
+        <article-title>Proposed Extension to Darwin Core for People and their Roles in the Curation of Physical and Digital Objects</article-title>
+      </title-group>
+      <contrib-group content-type="authors">
+        <contrib contrib-type="author" corresp="yes">
+          <name name-style="western">
+            <surname>Shorthouse</surname>
+            <given-names>David Peter</given-names>
+          </name>
+          <email xlink:type="simple">davidpshorthouse@gmail.com</email>
+          <uri content-type="orcid">https://orcid.org/0000-0001-7618-5230</uri>
+          <xref ref-type="aff" rid="A1">1</xref>
+        </contrib>
+      </contrib-group>
+      <aff id="A1">
+        <label>1</label>
+        <addr-line>Canadian Museum of Nature, Ottawa, Canada</addr-line>
+      </aff>
+      <author-notes>
+        <fn fn-type="corresp">
+          <p>Corresponding author: David Peter Shorthouse (<email xlink:type="simple">davidpshorthouse@gmail.com</email>).</p>
+        </fn>
+        <fn fn-type="edited-by">
+          <p>Academic editor: </p>
+        </fn>
+      </author-notes>
+      <pub-date pub-type="collection">
+        <year>2017</year>
+      </pub-date>
+      <pub-date pub-type="epub">
+        <day>27</day>
+        <month>07</month>
+        <year>2017</year>
+      </pub-date>
+      <issue>1</issue>
+      <elocation-id>e19829</elocation-id>
+      <history>
+        <date date-type="received">
+          <day>26</day>
+          <month>07</month>
+          <year>2017</year>
+        </date>
+      </history>
+      <permissions>
+        <copyright-statement>David Peter Shorthouse</copyright-statement>
+        <license license-type="creative-commons-attribution" xlink:href="http://creativecommons.org/licenses/by/4.0" xlink:type="simple">
+          <license-p>This is an open access article distributed under the terms of the Creative Commons Attribution License 4.0 (CC-BY), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+        </license>
+      </permissions>
+      <abstract>
+        <label>Abstract</label>
+        <p>The Global Biodiversity Information Facility's 2017-2021 implementation plan includes an item with a scheduled start in 2017 to develop mechanisms to support and reflect the skills, expertise and experience of individual and organizational contributions to their network. This includes revision of their identity management system and integration of Open Researcher and Contributor IDs (ORCID). Likewise, the Joint TDWG/Research Data Alliance Interest Group on metadata standards for attribution of physical and digital collection stewardship seeks to develop metadata standards for attributing curatorial actions. Here, I propose a lightweight extension to Darwin Core to accommodate new terms for agent identifiers and their roles in the curation of physical and digital objects. In parallel, I propose shared mechanisms and codebases to help parse and disambiguate agent names in the existing Darwin Core terms: recordedBy, identifiedBy, and scientificNameAuthorship. The solutions to deal with legacy data must fit within the Biodiversity Data Quality Interest Group's recently proposed conceptual framework and be made available to individual museums, and national and international aggregators of biodiversity data. A case study using occurrence data from the Canadensys network will reveal the challenges in reconciling people names and will uncover exciting opportunities for engagement when people are shown the impact they have on their research and collections communities.</p>
+      </abstract>
+      <kwd-group>
+        <label>Keywords</label>
+        <kwd>Darwin Core extension</kwd>
+        <kwd>ORCID</kwd>
+        <kwd>role</kwd>
+        <kwd>attribution</kwd>
+        <kwd>collections</kwd>
+        <kwd>curator</kwd>
+      </kwd-group>
+      <conference>
+   <conf-date>1-6 October 2017</conf-date>
+   <conf-name>TDWG 2017 Annual Conference</conf-name>
+   <conf-acronym>TDWG 2017</conf-acronym>
+   <conf-loc>Ottawa, Canada</conf-loc>
+   <conf-theme>Data Integration in a Big Data Universe: Associating Occurrences with Genes, Phenotypes, and Environments</conf-theme>
+</conference>
+      <counts>
+        <fig-count count="0"/>
+        <table-count count="0"/>
+        <ref-count count="0"/>
+      </counts>
+    </article-meta>
+    <notes>
+      <sec sec-type="Presenting author">
+        <title>Presenting author</title>
+        <p>David Peter Shorthouse</p>
+      </sec>
+      <sec sec-type="Conflicts of interest">
+        <title>Conflicts of interest</title>
+        <p>None</p>
+      </sec>
+    </notes>
+  </front>
+  
+  
+</article>
