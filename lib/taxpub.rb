@@ -3,7 +3,6 @@ require "taxpub/validator"
 require "taxpub/version"
 require "nokogiri"
 require "open-uri"
-require "byebug"
 
 class Taxpub
 
