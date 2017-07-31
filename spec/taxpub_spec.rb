@@ -88,14 +88,14 @@ describe "Taxpub", :include_helpers do
       end
     end
 
-    context "collection" do
-      it "outputs a collection from a proceeding" do
+    context "conference part" do
+      it "outputs a conference part from a proceeding" do
         collection = "24 Other Oral Presentations"
-        expect(parsed_proceedings_stub.collection).to eq(collection)
+        expect(parsed_proceedings_stub.conference_part).to eq(collection)
       end
-      it "outputs a collection from a paper" do
+      it "outputs a conference part from a paper" do
         collection = "24 Other Oral Presentations"
-        expect(parsed_paper_stub.collection).to be_empty
+        expect(parsed_paper_stub.conference_part).to be_empty
       end
     end
 
@@ -118,6 +118,17 @@ describe "Taxpub", :include_helpers do
       it "output keywords from a paper" do
         keywords = ["East Asia", "description", "Coelotinae", "taxonomy"]
         expect(parsed_paper_stub.keywords).to eq(keywords)
+      end
+    end
+
+    context "ranked taxa" do
+      it "output taxa from a proceeding" do
+        taxa = []
+        expect(parsed_proceedings_stub.ranked_taxa).to eq(taxa)
+      end
+      it "output taxa from a paper" do
+        expect(parsed_paper_stub.ranked_taxa.count).to eq(31)
+        expect(first = parsed_paper_stub.ranked_taxa[3]).to eq({:genus => "Longicoelotes", :species => "kulianganus"})
       end
     end
 

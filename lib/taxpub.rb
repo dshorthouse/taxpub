@@ -3,7 +3,7 @@ require "taxpub/validator"
 require "taxpub/version"
 require "nokogiri"
 require "open-uri"
-require "byebug"
+require "set"
 
 class Taxpub
 
@@ -108,7 +108,7 @@ class Taxpub
     data
   end
 
-  def collection
+  def conference_part
     Validator.validate_nokogiri(@doc)
     coll = @doc.xpath("//*/subj-group[@subj-group-type='conference-part']/subject").text
     clean_text(coll)
@@ -118,6 +118,25 @@ class Taxpub
     Validator.validate_nokogiri(@doc)
     author = @doc.xpath("//*/sec[@sec-type='Presenting author']/p").text
     clean_text(author)
+  end
+
+  def ranked_taxa
+    Validator.validate_nokogiri(@doc)
+    names = Set.new
+    @doc.xpath("//*//tp:taxon-name").each do |taxon|
+      tp = {}
+      taxon.children.each do |child|
+        next if !child.has_attribute?("taxon-name-part-type")
+        rank = child.attributes["taxon-name-part-type"].value.to_sym
+        if child.has_attribute?("reg")
+          tp[rank] = child.attributes["reg"].value
+        else
+          tp[rank] = child.text
+        end
+      end
+      names.add(tp)
+    end
+    names.to_a
   end
 
   def reference_dois
