@@ -1,4 +1,5 @@
 class Taxpub
-  class InvalidParameterValue < ArgumentError; end
+  class Error < RuntimeError; end
+  class InvalidParameterValueError < Taxpub::Error; end
   class InvalidTypeError < TypeError; end
 end

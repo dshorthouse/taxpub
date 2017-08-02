@@ -35,7 +35,7 @@ describe "Taxpub", :include_helpers do
       end
       it "it raises exception with invalid URL" do
         url = "ftp://tdwgproceedings.pensoft.net/article/15141/download/xml/"
-        expect{tps.url = url}.to raise_error(subject::InvalidParameterValue)
+        expect{tps.url = url}.to raise_error(subject::InvalidParameterValueError)
       end
     end
 
@@ -47,7 +47,7 @@ describe "Taxpub", :include_helpers do
       end
       it "raises an exception for an invalid file_path" do
         file_path = File.join(__dir__, "files", "none.txt")
-        expect{tps.file_path = file_path}.to raise_error(subject::InvalidParameterValue)
+        expect{tps.file_path = file_path}.to raise_error(subject::InvalidParameterValueError)
       end
     end
 
@@ -64,6 +64,11 @@ describe "Taxpub", :include_helpers do
         doi = "https://doi.org/10.3897/zookeys.686.11711"
         expect(parsed_paper_stub.doi).to eq(doi)
       end
+      it "raises an Exception if the document is not yet parsed" do
+        tps = Taxpub.new
+        tps.file_path = File.join(__dir__, "files", "zookeys.pensoft.net.xml")
+        expect{tps.doi}.to raise_error(subject::InvalidTypeError)
+      end
     end
 
     context "title" do
@@ -77,14 +82,36 @@ describe "Taxpub", :include_helpers do
       end
     end
 
+    context "abstract" do
+      it "outputs an abstract from a proceeding" do
+        abstract = "The Global Biodiversity Information Facility's 2017-2021"
+        expect(parsed_proceedings_stub.abstract).to start_with(abstract)
+      end
+      it "outputs an abstract from a paper" do
+        abstract = "A new Longicoeletes species is described from Jiangxi Province, China"
+        expect(parsed_paper_stub.abstract).to start_with(abstract)
+      end
+    end
+
     context "presenting author" do
       it "outputs the presenting author from a proceeding" do
         presenting_author = "David Peter Shorthouse"
         expect(parsed_proceedings_stub.presenting_author).to eq(presenting_author)
       end
-      it "outputs the presenting author from a paper" do
+      it "outputs an empty presenting author from a paper" do
         presenting_author = "David Peter Shorthouse"
         expect(parsed_paper_stub.presenting_author).to be_empty
+      end
+    end
+
+    context "corresponding author" do
+      it "outputs the corresponding author from a proceeding" do
+        corresponding_author = "David Peter Shorthouse (davidpshorthouse@gmail.com)"
+        expect(parsed_proceedings_stub.corresponding_author).to eq(corresponding_author)
+      end
+      it "outputs the corresponding author from a paper" do
+        corresponding_author = "Zhe Zhao (zhaozhe@ioz.ac.cn)"
+        expect(parsed_paper_stub.corresponding_author).to eq(corresponding_author)
       end
     end
 
@@ -101,22 +128,63 @@ describe "Taxpub", :include_helpers do
 
     context "authors" do
       it "output authors from a proceeding" do
-        author = "David Peter Shorthouse"
-        expect(parsed_proceedings_stub.authors.first[:fullname]).to eq(author)
+        author = {
+          given: "David Peter",
+          surname: "Shorthouse",
+          fullname: "David Peter Shorthouse",
+          email: "davidpshorthouse@gmail.com",
+          affiliation: "Canadian Museum of Nature, Ottawa, Canada",
+          orcid: "https://orcid.org/0000-0001-7618-5230"
+        }
+        expect(parsed_proceedings_stub.authors.first).to eq(author)
       end
-      it "output authors from a paper" do
-        author = "Xiaoqing Zhang"
-        expect(parsed_paper_stub.authors.first[:fullname]).to eq(author)
+      it "output authors from a proceeding without an affiliation" do
+        author = {
+          given: "Fabien",
+          surname: "Cavière",
+          fullname: "Fabien Cavière",
+          email: "caviere@gbif.fr",
+          affiliation: "",
+          orcid: ""
+        }
+        expect(parsed_proceedings_2_stub.authors.first).to eq(author)
+      end
+      it "output authors from a paper without email, affiliation, orcid" do
+        author = {
+          given: "Xiaoqing",
+          surname: "Zhang",
+          fullname: "Xiaoqing Zhang",
+          email: "",
+          affiliation: "Institute of Zoology, Chinese Academy of Sciences, Beijing 100101, China",
+          orcid: ""
+        }
+        expect(parsed_paper_stub.authors.first).to eq(author)
       end
     end
 
     context "keywords" do
       it "output keywords from a proceeding" do
-        keywords = ["Darwin Core extension", "ORCID", "role", "attribution", "collections", "curator"]
+        keywords = [
+          "Darwin Core extension",
+          "ORCID",
+          "role",
+          "attribution",
+          "collections",
+          "curator"
+        ]
         expect(parsed_proceedings_stub.keywords).to eq(keywords)
       end
+      it "output keywords from a proceeding that doesn't have any" do
+        keywords = []
+        expect(parsed_proceedings_2_stub.keywords).to eq(keywords)
+      end
       it "output keywords from a paper" do
-        keywords = ["East Asia", "description", "Coelotinae", "taxonomy"]
+        keywords = [
+          "East Asia",
+          "description",
+          "Coelotinae",
+          "taxonomy"
+        ]
         expect(parsed_paper_stub.keywords).to eq(keywords)
       end
     end
@@ -127,8 +195,9 @@ describe "Taxpub", :include_helpers do
         expect(parsed_proceedings_stub.ranked_taxa).to eq(taxa)
       end
       it "output taxa from a paper" do
+        species = {:genus => "Longicoelotes", :species => "kulianganus"}
         expect(parsed_paper_stub.ranked_taxa.count).to eq(31)
-        expect(first = parsed_paper_stub.ranked_taxa[3]).to eq({:genus => "Longicoelotes", :species => "kulianganus"})
+        expect(parsed_paper_stub.ranked_taxa[3]).to eq(species)
       end
     end
 

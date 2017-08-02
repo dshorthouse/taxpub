@@ -4,6 +4,7 @@ require "taxpub/version"
 require "nokogiri"
 require "open-uri"
 require "set"
+require "byebug"
 
 class Taxpub
 
@@ -78,33 +79,33 @@ class Taxpub
 
   def abstract
     Validator.validate_nokogiri(@doc)
-    a = @doc.xpath("//*/article-meta/abstract/*/p").text
+    a = @doc.xpath("//*/article-meta/abstract/p").text
     clean_text(a)
   end
 
   def keywords
     Validator.validate_nokogiri(@doc)
-    @doc.xpath("//*/article-meta/kwd-group/kwd").map(&:text) rescue []
+    @doc.xpath("//*/article-meta/kwd-group/kwd").map(&:text)
   end
 
   def authors
     Validator.validate_nokogiri(@doc)
     data = []
     @doc.xpath("//*/contrib[@contrib-type='author']").each do |author|
-      rid = author.xpath("xref").attr("rid").value rescue nil
-      affiliation = nil
-      if !rid.nil?
-        affiliation = clean_text(@doc.xpath("//*/aff[@id='#{rid}']/addr-line").text)
+      affiliations = []
+      author.xpath("xref/@rid").each do |rid|
+        xpath = "//*/aff[@id='#{rid}']/addr-line"
+        affiliations << clean_text(@doc.xpath(xpath).text)
       end
-      orcid = author.xpath("uri[@content-type='orcid']").text rescue nil
+      orcid = author.xpath("uri[@content-type='orcid']").text
       given = clean_text(author.xpath("name/given-names").text)
       surname = clean_text(author.xpath("name/surname").text)
-      data << { 
+      data << {
         given: given,
         surname: surname,
         fullname: [given, surname].join(" "),
         email: author.xpath("email").text,
-        affiliation: affiliation,
+        affiliation: affiliations.join(", "),
         orcid: orcid
       }
     end
@@ -113,14 +114,23 @@ class Taxpub
 
   def conference_part
     Validator.validate_nokogiri(@doc)
-    coll = @doc.xpath("//*/subj-group[@subj-group-type='conference-part']/subject").text
+    xpath = "//*/subj-group[@subj-group-type='conference-part']/subject"
+    coll = @doc.xpath(xpath).text
     clean_text(coll)
   end
 
   def presenting_author
     Validator.validate_nokogiri(@doc)
-    author = @doc.xpath("//*/sec[@sec-type='Presenting author']/p").text
+    xpath = "//*/sec[@sec-type='Presenting author']/p"
+    author = @doc.xpath(xpath).text
     clean_text(author)
+  end
+
+  def corresponding_author
+    Validator.validate_nokogiri(@doc)
+    xpath = "//*/author-notes/fn[@fn-type='corresp']/p"
+    author_string = clean_text(@doc.xpath(xpath).text)
+    author_string.gsub("Corresponding author: ", "").chomp(".")
   end
 
   def ranked_taxa
@@ -144,12 +154,14 @@ class Taxpub
 
   def reference_dois
     Validator.validate_nokogiri(@doc)
-    ext_link = @doc.xpath("//*/ref-list/ref/*/ext-link[@ext-link-type='doi']")
-                   .map(&:text)
-                   .map{ |a| expand_doi(a) }
-    pub_id = @doc.xpath("//*/ref-list/ref/*/pub-id[@pub-id-type='doi']")
-                 .map(&:text)
-                 .map{ |a| expand_doi(a) }
+    xpath = "//*/ref-list/ref/*/ext-link[@ext-link-type='doi']"
+    ext_link = @doc.xpath(xpath)
+                   .map{ |a| expand_doi(a.text) }
+
+    xpath = "//*/ref-list/ref/*/pub-id[@pub-id-type='doi']"
+    pub_id = @doc.xpath(xpath)
+                 .map{ |a| expand_doi(a.text) }
+
     (ext_link + pub_id).uniq
   end
 
@@ -158,6 +170,7 @@ class Taxpub
   def clean_text(text)
     text.encode("UTF-8", :undef => :replace, :invalid => :replace, :replace => " ")
         .gsub(/[[:space:]]/, " ")
+        .chomp(",")
         .split
         .join(" ")
   end

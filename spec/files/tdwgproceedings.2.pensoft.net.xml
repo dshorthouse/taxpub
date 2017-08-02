@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//TaxonX//DTD Taxonomic Treatment Publishing DTD v0 20100105//EN" "../../nlm/tax-treatment-NS0.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tp="http://www.plazi.org/taxpub" article-type="research-article">
+  <front>
+    <journal-meta>
+      <journal-id journal-id-type="pmc">Proceedings of TDWG</journal-id>
+      <journal-id journal-id-type="publisher-id">Proceedings of TDWG</journal-id>
+      <journal-title-group>
+        <journal-title xml:lang="en">Proceedings of TDWG</journal-title>
+        <abbrev-journal-title xml:lang="en">TDWGProc</abbrev-journal-title>
+      </journal-title-group>
+      <issn pub-type="epub">2535-0897</issn>
+      <publisher>
+        <publisher-name>Pensoft Publishers</publisher-name>
+      </publisher>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="publisher-id">Proceedings of TDWG</article-id>
+      <article-id pub-id-type="doi">10.3897/tdwgproceedings.1.19941</article-id>
+      <article-id pub-id-type="other">7727</article-id>
+      <article-categories>
+        <subj-group subj-group-type="heading">
+          <subject>Conference Abstract</subject>
+        </subj-group>
+        <subj-group subj-group-type="conference-part">
+          <subject>07 Workshop: Reusing an open source platform in order to create a community: example of the Living Atlases community</subject>
+        </subj-group>
+      </article-categories>
+      <title-group>
+        <article-title>Documentation about Atlas of Living Australia tools: how to find information</article-title>
+      </title-group>
+      <contrib-group content-type="authors">
+        <contrib contrib-type="author" corresp="yes">
+          <name name-style="western">
+            <surname>Cavière</surname>
+            <given-names>Fabien</given-names>
+          </name>
+          <email xlink:type="simple">caviere@gbif.fr</email>
+        </contrib>
+      </contrib-group>
+      <author-notes>
+        <fn fn-type="corresp">
+          <p>Corresponding author: Fabien Cavière (<email xlink:type="simple">caviere@gbif.fr</email>).</p>
+        </fn>
+        <fn fn-type="edited-by">
+          <p>Academic editor: </p>
+        </fn>
+      </author-notes>
+      <pub-date pub-type="collection">
+        <year>2017</year>
+      </pub-date>
+      <pub-date pub-type="epub">
+        <day>01</day>
+        <month>08</month>
+        <year>2017</year>
+      </pub-date>
+      <issue>1</issue>
+      <elocation-id>e19941</elocation-id>
+      <history>
+        <date date-type="received">
+          <day>31</day>
+          <month>07</month>
+          <year>2017</year>
+        </date>
+      </history>
+      <permissions>
+        <copyright-statement>Fabien Cavière</copyright-statement>
+        <license license-type="creative-commons-attribution" xlink:href="http://creativecommons.org/licenses/by/4.0" xlink:type="simple">
+          <license-p>This is an open access article distributed under the terms of the Creative Commons Attribution License 4.0 (CC-BY), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+        </license>
+      </permissions>
+      <abstract>
+        <label>Abstract</label>
+        <p>ince 2013, a community has been created around Atlas of Living Australia (ALA) tools *<xref ref-type="fn" rid="FN3709549">1</xref>, an open source platform developed by the Australian node of the Global Biodiversity Infrastructure Facility (GBIF) (also named ALA). Its primary goal is to provide information on Australian biodiversity. Its modular architecture has been designed to help institutions worldwide reusing it for their data portals. Eight ALA-like platforms are currently in production around the world with different levels of implementation. Until date, five international workshops have been organized focusing on numerous subjects ranging from first step to install the data portal to configuring the advanced spatial portal. This has helped the community to grow significantly.  </p>
+        <p>GBIF France, the French node of the GBIF established in 2006, has been part of the Living Atlases community since 2014. GBIF France is an active members of ALA community and is one of the eight institutions with ALA based data portal in production.</p>
+        <p>The main object of this presentation is to describe the documentation part writing by the ALA team with the help of the community, and located on the ALA GitHub account *<xref ref-type="fn" rid="FN3709550">2</xref>. Thanks to this tool, anybody can read the different sections of the documentation. It is organized by themes and highlight important subjects for new or advanced users such as architecture, how to install your own demonstration ALA data portal,  internationalization, customization, etc. A huge part of this manual is feedbacks from advanced developers to help newcomers by presenting their own architectures, customization and tips.</p>
+        <p>In this presentation, we will demonstrate how the documentation is a key point to help the community to be durable and efficient. We will also present its central thread and how we manage all elements around it. Finally, we will discuss about the wiki by defining good practices to request more information about a specific theme or add tips from your own experience.</p>
+      </abstract>
+      <conference>
+   <conf-date>1-6 October 2017</conf-date>
+   <conf-name>TDWG 2017 Annual Conference</conf-name>
+   <conf-acronym>TDWG 2017</conf-acronym>
+   <conf-loc>Ottawa, Canada</conf-loc>
+   <conf-theme>Data Integration in a Big Data Universe: Associating Occurrences with Genes, Phenotypes, and Environments</conf-theme>
+</conference>
+      <counts>
+        <fig-count count="0"/>
+        <table-count count="0"/>
+        <ref-count count="0"/>
+      </counts>
+    </article-meta>
+    <notes>
+      <sec sec-type="Presenting author">
+        <title>Presenting author</title>
+        <p>Fabien Cavière</p>
+      </sec>
+    </notes>
+  </front>
+  
+  <back>
+    <fn-group>
+      <fn id="FN3709549">
+        <label>*1</label>
+        <p>
+          <ext-link ext-link-type="uri" xlink:href="https://github.com/AtlasOfLivingAustralia">https://github.com/AtlasOfLivingAustralia</ext-link>
+        </p>
+      </fn>
+      <fn id="FN3709550">
+        <label>*2</label>
+        <p>
+          <ext-link ext-link-type="uri" xlink:href="https://github.com/AtlasOfLivingAustralia/documentation">https://github.com/AtlasOfLivingAustralia/documentation</ext-link>
+        </p>
+      </fn>
+    </fn-group>
+  </back>
+</article>
