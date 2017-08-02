@@ -53,6 +53,9 @@ class Taxpub
     @parameters[:file].path rescue nil
   end
 
+  ##
+  # Build the Nokogiri document
+  #
   def parse
     if url
       @doc = Nokogiri::XML(open(url))
@@ -62,32 +65,50 @@ class Taxpub
     Validator.validate_nokogiri(@doc)
   end
 
+  ##
+  # View the parsed Nokogiri document
+  #
   def doc
     @doc
   end
 
+  ##
+  # Get the DOI
+  #
   def doi
     Validator.validate_nokogiri(@doc)
     expand_doi(@doc.xpath("//*/article-meta/article-id[@pub-id-type='doi']").text)
   end
 
+  ##
+  # Get the title
+  #
   def title
     Validator.validate_nokogiri(@doc)
     t = @doc.xpath("//*/article-meta/title-group/article-title").text
     clean_text(t)
   end
 
+  ##
+  # Get the abstract
+  #
   def abstract
     Validator.validate_nokogiri(@doc)
     a = @doc.xpath("//*/article-meta/abstract/p").text
     clean_text(a)
   end
 
+  ##
+  # Get the keywords
+  #
   def keywords
     Validator.validate_nokogiri(@doc)
     @doc.xpath("//*/article-meta/kwd-group/kwd").map(&:text)
   end
 
+  ##
+  # Get the authors
+  #
   def authors
     Validator.validate_nokogiri(@doc)
     data = []
@@ -112,6 +133,9 @@ class Taxpub
     data
   end
 
+  ##
+  # Get the conference part if a proceedings
+  #
   def conference_part
     Validator.validate_nokogiri(@doc)
     xpath = "//*/subj-group[@subj-group-type='conference-part']/subject"
@@ -119,6 +143,9 @@ class Taxpub
     clean_text(coll)
   end
 
+  ##
+  # Get the presenting author if a proceedings
+  #
   def presenting_author
     Validator.validate_nokogiri(@doc)
     xpath = "//*/sec[@sec-type='Presenting author']/p"
@@ -126,6 +153,9 @@ class Taxpub
     clean_text(author)
   end
 
+  ##
+  # Get the corresponding author
+  #
   def corresponding_author
     Validator.validate_nokogiri(@doc)
     xpath = "//*/author-notes/fn[@fn-type='corresp']/p"
@@ -133,6 +163,9 @@ class Taxpub
     author_string.gsub("Corresponding author: ", "").chomp(".")
   end
 
+  ##
+  # Get the ranked taxa
+  #
   def ranked_taxa
     Validator.validate_nokogiri(@doc)
     names = Set.new
@@ -152,6 +185,9 @@ class Taxpub
     names.to_a
   end
 
+  ##
+  # Get the DOIs from reference list
+  #
   def reference_dois
     Validator.validate_nokogiri(@doc)
     xpath = "//*/ref-list/ref/*/ext-link[@ext-link-type='doi']"
