@@ -91,8 +91,11 @@ class Taxpub
     Validator.validate_nokogiri(@doc)
     data = []
     @doc.xpath("//*/contrib[@contrib-type='author']").each do |author|
-      rid = author.xpath("xref").attr("rid").value
-      affiliation = clean_text(@doc.xpath("//*/aff[@id='#{rid}']/addr-line").text)
+      rid = author.xpath("xref").attr("rid").value rescue nil
+      affiliation = nil
+      if !rid.nil?
+        affiliation = clean_text(@doc.xpath("//*/aff[@id='#{rid}']/addr-line").text)
+      end
       orcid = author.xpath("uri[@content-type='orcid']").text rescue nil
       given = clean_text(author.xpath("name/given-names").text)
       surname = clean_text(author.xpath("name/surname").text)
