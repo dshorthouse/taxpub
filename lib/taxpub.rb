@@ -4,7 +4,6 @@ require "taxpub/version"
 require "nokogiri"
 require "open-uri"
 require "set"
-require "byebug"
 
 class Taxpub
 
@@ -236,7 +235,7 @@ class Taxpub
     title = ele.xpath("article-title").text.chomp(".")
     source = ele.xpath("source").text.chomp(".")
     volume = ele.xpath("volume").text
-    pages = [ele.xpath("fpage"), ele.xpath("lpage")].reject(&:empty?).join("--")
+    pages = [ele.xpath("fpage"), ele.xpath("lpage")].reject(&:empty?).join("–")
 
     if ref.at_xpath("element-citation")
       doi = expand_doi(ele.xpath("pub-id[@pub-id-type='doi']").text)
@@ -253,7 +252,7 @@ class Taxpub
     {
       title: title,
       institution: institution,
-      author: auths,
+      authors: auths,
       year: year,
       source: source,
       volume: volume,

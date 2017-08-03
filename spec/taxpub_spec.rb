@@ -212,10 +212,11 @@ describe "Taxpub", :include_helpers do
       it "output references from a proceeding" do
         refs = parsed_proceedings_3_stub.references
         expect(refs.count).to eq(3)
+        expect(refs[0][:authors].count).to eq(6)
         doi = "https://doi.org/10.1023/A:1011438729881"
         expect(refs[1][:doi]).to eq(doi)
       end
-      it "output reference dois from a paper" do
+      it "output references from a paper" do
         refs = parsed_paper_stub.references
         expect(refs.count).to eq(10)
         cit = "World Spider Catalog. 2017. World Spider Catalog. http://wsc.nmbe.ch"
@@ -223,7 +224,7 @@ describe "Taxpub", :include_helpers do
 
         cit = "Zhao, Z, S Li. 2016. Papiliocoelotes gen. n., a new genus of "\
               "Coelotinae (Araneae, Agelenidae) spiders from the Wuling "\
-              "Mountains, China. ZooKeys 585: 33--50. "\
+              "Mountains, China. ZooKeys 585: 33–50. "\
               "https://doi.org/10.3897/zookeys.585.8007"
         expect(refs[8][:full_citation]).to eq(cit)
 
