@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//TaxonX//DTD Taxonomic Treatment Publishing DTD v0 20100105//EN" "../../nlm/tax-treatment-NS0.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tp="http://www.plazi.org/taxpub" article-type="research-article">
+  <front>
+    <journal-meta>
+      <journal-id journal-id-type="pmc">Proceedings of TDWG</journal-id>
+      <journal-id journal-id-type="publisher-id">Proceedings of TDWG</journal-id>
+      <journal-title-group>
+        <journal-title xml:lang="en">Proceedings of TDWG</journal-title>
+        <abbrev-journal-title xml:lang="en">TDWGProc</abbrev-journal-title>
+      </journal-title-group>
+      <issn pub-type="epub">2535-0897</issn>
+      <publisher>
+        <publisher-name>Pensoft Publishers</publisher-name>
+      </publisher>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="publisher-id">Proceedings of TDWG</article-id>
+      <article-id pub-id-type="doi">10.3897/tdwgproceedings.1.19820</article-id>
+      <article-id pub-id-type="other">7986</article-id>
+      <article-categories>
+        <subj-group subj-group-type="heading">
+          <subject>Conference Abstract</subject>
+        </subj-group>
+        <subj-group subj-group-type="conference-part">
+          <subject>15 Symposium: Agricultural Informatics Contributions to Biodiversity Science and Biodiversity Assessments</subject>
+        </subj-group>
+      </article-categories>
+      <title-group>
+        <article-title>Databasing Crop Plants from the People's Biodiversity Register of India</article-title>
+      </title-group>
+      <contrib-group content-type="authors">
+        <contrib contrib-type="author" corresp="yes">
+          <name name-style="western">
+            <surname>Rajagopal</surname>
+            <given-names>Prabhakar</given-names>
+          </name>
+          <email xlink:type="simple">prabha.prabhakar@gmail.com</email>
+          <xref ref-type="aff" rid="A1">1</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Vattakaven</surname>
+            <given-names>Thomas</given-names>
+          </name>
+          <uri content-type="orcid">https://orcid.org/0000-0002-2337-3825</uri>
+          <xref ref-type="aff" rid="A1">1</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Dhandapani</surname>
+            <given-names>Balasubramanian</given-names>
+          </name>
+          <xref ref-type="aff" rid="A2">2</xref>
+        </contrib>
+      </contrib-group>
+      <aff id="A1">
+        <label>1</label>
+        <addr-line>Strand Life Sciences, Bangalore 560024, India</addr-line>
+      </aff>
+      <aff id="A2">
+        <label>2</label>
+        <addr-line>French Institute of Pondicherry, Puducherry 605001, India</addr-line>
+      </aff>
+      <author-notes>
+        <fn fn-type="corresp">
+          <p>Corresponding author: Prabhakar Rajagopal (<email xlink:type="simple">prabha.prabhakar@gmail.com</email>).</p>
+        </fn>
+        <fn fn-type="edited-by">
+          <p>Academic editor: </p>
+        </fn>
+      </author-notes>
+      <pub-date pub-type="collection">
+        <year>2017</year>
+      </pub-date>
+      <pub-date pub-type="epub">
+        <day>27</day>
+        <month>07</month>
+        <year>2017</year>
+      </pub-date>
+      <issue>1</issue>
+      <elocation-id>e19820</elocation-id>
+      <history>
+        <date date-type="received">
+          <day>26</day>
+          <month>07</month>
+          <year>2017</year>
+        </date>
+      </history>
+      <permissions>
+        <copyright-statement>Prabhakar Rajagopal, Thomas Vattakaven, Balasubramanian Dhandapani</copyright-statement>
+        <license license-type="creative-commons-attribution" xlink:href="http://creativecommons.org/licenses/by/4.0" xlink:type="simple">
+          <license-p>This is an open access article distributed under the terms of the Creative Commons Attribution License 4.0 (CC-BY), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+        </license>
+      </permissions>
+      <abstract>
+        <label>Abstract</label>
+        <p>Documenting and understanding agrobiodiversity is important for human well-being, agricultural sustainability and food security. This is more significant and urgent in the current context of massive landscape transformation, industrialization of agriculture and climate change. Recognizing the limited data on agricultural biodiversity (ABD), the Global Biodiversity Information Facility (GBIF) constituted a task force on ABD, which published its final report in February 2016 (<xref ref-type="bibr" rid="B3725481">Arnaud et al. 2016</xref>). The report highlighted the need for comprehensive standards for databasing, structuring, exchange and use of information on ABD, which included not only genebank and germplasm databases but also in-situ information of landraces and cultivars held by farmers and cultivators across the world.</p>
+        <p>While there are standards to facilitate germplasm passport information exchange (Multi-Crop Passport Descriptors, MCPD), databases of crop wild relatives, cultivars, landraces and neglected and underutilized crop species, are completely absent. The world over, farmer and cultivator groups have selected and bred crop varieties, especially in tropical areas, which have not entered genebanks and are much more dynamic and constantly evolving. Documenting and databasing such information has challenges in effectively integrating wild relatives, landraces, cultivars, vernacular names, cultivation practices and crop traits into a consistent taxonomic backbone.</p>
+        <p>India has identified 22 agro-biodiversity hotspots, where attempts have been made to document the ABD in a systematic way. The People’s Biodiversity Register (PBR) (<xref ref-type="bibr" rid="B3725840">National Biodiversity Authority, India 2013</xref>), conceived in the late 1990s (<xref ref-type="bibr" rid="B3725849">Gadgil 2000</xref>), was an attempt to capture the biodiversity of a village level administrative unit called a Panchayat, with 31 predefined formats covering crop plants to natural biodiversity, extensively documented by community initiatives across India. While the implementation has been patchy, there are a few detailed PBRs in the Eastern Himalayas, the Brahmaputra Valley and Assam, which is an important agro biodiversity hotspot and center for speciation and domestication of rice. Some of these areas have detailed over 180 crop plants along with their scientific name, local name, variety, habitat, local status, and agronomy details. We will discuss the challenges in databasing this extensive community-generated information and referencing it on a taxonomic backbone that will have the ability to capture infraspecific taxonomy levels with additional attributes related to the crop wild relative species, landraces and cultivars, along with local names. It should provide the flexibility of referencing, databasing, editing, synonymizing and splitting names on the taxonomic backbone. <styled-content style="font-weight:normal;">It should have the ability to capture other details of cultivars and landraces including location, local status, morphology and cultivation practices, with the ability to share and export the data in structured formats and standards as they evolve. </styled-content></p>
+      </abstract>
+      <kwd-group>
+        <label>Keywords</label>
+        <kwd>Agrobiodiversity</kwd>
+        <kwd>People's Biodiversity Register</kwd>
+        <kwd>India Biodiversity Portal</kwd>
+        <kwd>India</kwd>
+        <kwd>wild crop relative</kwd>
+        <kwd>landraces</kwd>
+        <kwd>cultivars</kwd>
+        <kwd>vernacular names</kwd>
+      </kwd-group>
+      <conference>
+   <conf-date>1-6 October 2017</conf-date>
+   <conf-name>TDWG 2017 Annual Conference</conf-name>
+   <conf-acronym>TDWG 2017</conf-acronym>
+   <conf-loc>Ottawa, Canada</conf-loc>
+   <conf-theme>Data Integration in a Big Data Universe: Associating Occurrences with Genes, Phenotypes, and Environments</conf-theme>
+</conference>
+      <counts>
+        <fig-count count="0"/>
+        <table-count count="0"/>
+        <ref-count count="3"/>
+      </counts>
+    </article-meta>
+    <notes>
+      <sec sec-type="Presenting author">
+        <title>Presenting author</title>
+        <p>Prabhakar Rajagopal</p>
+      </sec>
+    </notes>
+  </front>
+  
+  <back>
+    <ref-list>
+      <title>References</title>
+      <ref id="B3725481">
+        <element-citation publication-type="thesis">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Arnaud</surname>
+              <given-names>Elizabeth</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Castañeda-Álvarez</surname>
+              <given-names>Nora Patricia</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Cossi</surname>
+              <given-names>Jean Ganglo</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Endresen</surname>
+              <given-names>Dag</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Jahanshiri</surname>
+              <given-names>Ebrahim</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Vigouroux</surname>
+              <given-names>Yves</given-names>
+            </name>
+          </person-group>
+          <year>2016</year>
+          <source>Final Report of the Task Group on GBIF Data Fitness for Use in Agrobiodiversity.</source>
+          <publisher-name>Global Biodiversity Information Facility.</publisher-name>
+          <uri>http://www.gbif.org/resource/82283</uri>
+        </element-citation>
+      </ref>
+      <ref id="B3725849">
+        <element-citation publication-type="article">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Gadgil</surname>
+              <given-names>Madhav</given-names>
+            </name>
+          </person-group>
+          <year>2000</year>
+          <article-title>People's Biodiversity Registers: Lessons Learnt.</article-title>
+          <source>Environment, Development and Sustainability.</source>
+          <volume>Volume 2</volume>
+          <issue>3–4</issue>
+          <fpage>323</fpage>
+          <lpage>332</lpage>
+          <comment content-type="language">English</comment>
+          <uri>https://link.springer.com/article/10.1023/A:1011438729881</uri>
+          <pub-id pub-id-type="doi">10.1023/A:1011438729881</pub-id>
+        </element-citation>
+      </ref>
+      <ref id="B3725840">
+        <element-citation publication-type="website">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>National Biodiversity Authority</surname>
+              <given-names>India</given-names>
+            </name>
+          </person-group>
+          <article-title>People's Biodiversity Register. Revised PBR Guidelines 2013</article-title>
+          <uri>http://nbaindia.org/uploaded/pdf/PBR%20Format%202013.pdf</uri>
+        </element-citation>
+      </ref>
+    </ref-list>
+  </back>
+</article>

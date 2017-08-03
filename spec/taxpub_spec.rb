@@ -133,7 +133,7 @@ describe "Taxpub", :include_helpers do
           surname: "Shorthouse",
           fullname: "David Peter Shorthouse",
           email: "davidpshorthouse@gmail.com",
-          affiliation: "Canadian Museum of Nature, Ottawa, Canada",
+          affiliations: ["Canadian Museum of Nature, Ottawa, Canada"],
           orcid: "https://orcid.org/0000-0001-7618-5230"
         }
         expect(parsed_proceedings_stub.authors.first).to eq(author)
@@ -144,7 +144,7 @@ describe "Taxpub", :include_helpers do
           surname: "Cavière",
           fullname: "Fabien Cavière",
           email: "caviere@gbif.fr",
-          affiliation: "",
+          affiliations: [],
           orcid: ""
         }
         expect(parsed_proceedings_2_stub.authors.first).to eq(author)
@@ -155,7 +155,10 @@ describe "Taxpub", :include_helpers do
           surname: "Zhang",
           fullname: "Xiaoqing Zhang",
           email: "",
-          affiliation: "Institute of Zoology, Chinese Academy of Sciences, Beijing 100101, China",
+          affiliations: [
+            "Institute of Zoology",
+            "Chinese Academy of Sciences, Beijing 100101, China"
+          ],
           orcid: ""
         }
         expect(parsed_paper_stub.authors.first).to eq(author)
@@ -201,22 +204,29 @@ describe "Taxpub", :include_helpers do
       end
     end
 
-    context "references with dois" do
-      it "output reference dois from a proceeding" do
-        dois = []
-        expect(parsed_proceedings_stub.reference_dois).to eq(dois)
+    context "references" do
+      it "output no references from a proceeding if there aren't any" do
+        references = []
+        expect(parsed_proceedings_stub.references).to eq(references)
+      end
+      it "output references from a proceeding" do
+        refs = parsed_proceedings_3_stub.references
+        expect(refs.count).to eq(3)
+        doi = "https://doi.org/10.1023/A:1011438729881"
+        expect(refs[1][:doi]).to eq(doi)
       end
       it "output reference dois from a paper" do
-        dois = [
-          "https://doi.org/10.5479/si.00963801.63-2481.1",
-          "https://doi.org/10.1007/s13238-016-0318-x",
-          "https://doi.org/10.1016/j.ympev.2010.02.021",
-          "https://doi.org/10.2476/asjaa.49.165",
-          "https://doi.org/10.1206/0003-0090(2002)269<0001:AGLROT>2.0.CO;2",
-          "https://doi.org/10.3897/zookeys.585.8007",
-          "https://doi.org/10.1371/journal.pone.0061814"
-        ]
-        expect(parsed_paper_stub.reference_dois).to eq(dois)
+        refs = parsed_paper_stub.references
+        expect(refs.count).to eq(10)
+        cit = "World Spider Catalog. 2017. World Spider Catalog. http://wsc.nmbe.ch"
+        expect(refs[7][:full_citation]).to eq(cit)
+
+        cit = "Zhao, Z, S Li. 2016. Papiliocoelotes gen. n., a new genus of "\
+              "Coelotinae (Araneae, Agelenidae) spiders from the Wuling "\
+              "Mountains, China. ZooKeys 585: 33--50. "\
+              "https://doi.org/10.3897/zookeys.585.8007"
+        expect(refs[8][:full_citation]).to eq(cit)
+
       end
     end
 

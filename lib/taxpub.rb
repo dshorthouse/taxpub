@@ -126,7 +126,7 @@ class Taxpub
         surname: surname,
         fullname: [given, surname].join(" "),
         email: author.xpath("email").text,
-        affiliation: affiliations.join(", "),
+        affiliations: affiliations,
         orcid: orcid
       }
     end
@@ -134,7 +134,7 @@ class Taxpub
   end
 
   ##
-  # Get the conference part if a proceedings
+  # Get the conference part of a proceeding
   #
   def conference_part
     Validator.validate_nokogiri(@doc)
@@ -144,7 +144,7 @@ class Taxpub
   end
 
   ##
-  # Get the presenting author if a proceedings
+  # Get the presenting author of a proceeding
   #
   def presenting_author
     Validator.validate_nokogiri(@doc)
@@ -186,19 +186,12 @@ class Taxpub
   end
 
   ##
-  # Get the DOIs from reference list
+  # Get the cited references
   #
-  def reference_dois
+  def references
     Validator.validate_nokogiri(@doc)
-    xpath = "//*/ref-list/ref/*/ext-link[@ext-link-type='doi']"
-    ext_link = @doc.xpath(xpath)
-                   .map{ |a| expand_doi(a.text) }
-
-    xpath = "//*/ref-list/ref/*/pub-id[@pub-id-type='doi']"
-    pub_id = @doc.xpath(xpath)
-                 .map{ |a| expand_doi(a.text) }
-
-    (ext_link + pub_id).uniq
+    xpath = "//*/ref-list/ref"
+    @doc.xpath(xpath).map{ |r| parse_ref(r) }
   end
 
   private
@@ -216,6 +209,69 @@ class Taxpub
       doi.prepend("https://doi.org/")
     end
     doi
+  end
+
+  def authors_to_string(auths)
+    authors = auths.dup
+    return "" if authors.empty?
+    first = authors.first.values.join(", ")
+    authors.shift
+    remaining = authors.map{|a| a.values.reverse.join(" ")}.join(", ")
+    [first, remaining].reject(&:empty?).join(", ")
+  end
+
+  def parse_ref(ref)
+    ele = ref.at_xpath("element-citation") || ref.at_xpath("mixed-citation")
+
+    auths = []
+    ele.xpath("person-group/name").each do |name|
+      auths << { 
+        surname: name.xpath("surname").text,
+        given_names: name.xpath("given-names").text
+      }
+    end
+
+    institution = ele.xpath("institution").text
+    year = ele.xpath("year").text
+    title = ele.xpath("article-title").text.chomp(".")
+    source = ele.xpath("source").text.chomp(".")
+    volume = ele.xpath("volume").text
+    pages = [ele.xpath("fpage"), ele.xpath("lpage")].reject(&:empty?).join("--")
+
+    if ref.at_xpath("element-citation")
+      doi = expand_doi(ele.xpath("pub-id[@pub-id-type='doi']").text)
+      uri = ele.xpath("uri").text
+    end
+
+    if ref.at_xpath("mixed-citation")
+      doi = expand_doi(ele.xpath("ext-link[@ext-link-type='doi']").text)
+      uri = ele.xpath("ext-link[@ext-link-type='uri']").text
+    end
+
+    link = !doi.empty? ? doi : uri
+
+    {
+      title: title,
+      institution: institution,
+      author: auths,
+      year: year,
+      source: source,
+      volume: volume,
+      pages: pages,
+      doi: doi,
+      uri: uri,
+      full_citation: [
+        institution,
+        authors_to_string(auths),
+        year,
+        title,
+        [
+          source,
+          [volume, pages].reject(&:empty?).join(": ")
+        ].reject(&:empty?).join(" "), 
+        link
+      ].reject(&:empty?).join(". ")
+    }
   end
 
 end
