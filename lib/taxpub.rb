@@ -206,6 +206,22 @@ class Taxpub
     data
   end
 
+  def figures
+    Validator.validate_nokogiri(@doc)
+    data = []
+    @doc.xpath("//*/fig").each do |fig|
+      data << {
+        label: clean_text(fig.xpath("label").text),
+        caption: clean_text(fig.xpath("caption").text),
+        graphic: {
+          href: fig.xpath("graphic").attribute("href").text,
+          id: fig.xpath("graphic").attribute("id").text
+        }
+      }
+    end
+    data
+  end
+
   ##
   # Get the cited references
   #

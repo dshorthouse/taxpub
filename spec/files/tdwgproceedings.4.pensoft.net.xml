@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//TaxonX//DTD Taxonomic Treatment Publishing DTD v0 20100105//EN" "../../nlm/tax-treatment-NS0.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tp="http://www.plazi.org/taxpub" article-type="research-article">
+  <front>
+    <journal-meta>
+      <journal-id journal-id-type="pmc">Proceedings of TDWG</journal-id>
+      <journal-id journal-id-type="publisher-id">Proceedings of TDWG</journal-id>
+      <journal-title-group>
+        <journal-title xml:lang="en">Proceedings of TDWG</journal-title>
+        <abbrev-journal-title xml:lang="en">TDWGProc</abbrev-journal-title>
+      </journal-title-group>
+      <issn pub-type="epub">2535-0897</issn>
+      <publisher>
+        <publisher-name>Pensoft Publishers</publisher-name>
+      </publisher>
+    </journal-meta>
+    <article-meta>
+      <article-id pub-id-type="publisher-id">Proceedings of TDWG</article-id>
+      <article-id pub-id-type="doi">10.3897/tdwgproceedings.1.20084</article-id>
+      <article-id pub-id-type="other">8047</article-id>
+      <article-categories>
+        <subj-group subj-group-type="heading">
+          <subject>Conference Abstract</subject>
+        </subj-group>
+        <subj-group subj-group-type="conference-part">
+          <subject>19 Workshop: Construction of biodiversity knowledge graphs  driven by federated text mining tools</subject>
+        </subj-group>
+      </article-categories>
+      <title-group>
+        <article-title>OpenBiodiv: an Implementaion of a Semantic System Running on top of the Biodiversity Knowledge Graph</article-title>
+      </title-group>
+      <contrib-group content-type="authors">
+        <contrib contrib-type="author" corresp="yes">
+          <name name-style="western">
+            <surname>Senderov</surname>
+            <given-names>Viktor</given-names>
+          </name>
+          <email xlink:type="simple">datascience@pensoft.net</email>
+          <uri content-type="orcid">https://orcid.org/0000-0003-3340-5963</uri>
+          <xref ref-type="aff" rid="A1">1</xref>
+          <xref ref-type="aff" rid="A2">2</xref>
+          <xref ref-type="aff" rid="A1">1</xref>
+          <xref ref-type="aff" rid="A2">2</xref>
+          <xref ref-type="aff" rid="A3">3</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Georgiev</surname>
+            <given-names>Teodor Asenov</given-names>
+          </name>
+          <uri content-type="orcid">https://orcid.org/0000-0001-8558-6845</uri>
+          <xref ref-type="aff" rid="A1">1</xref>
+          <xref ref-type="aff" rid="A1">1</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Agosti</surname>
+            <given-names>Donat</given-names>
+          </name>
+          <xref ref-type="aff" rid="A4">4</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Catapano</surname>
+            <given-names>Terry</given-names>
+          </name>
+          <xref ref-type="aff" rid="A5">5</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Sautter</surname>
+            <given-names>Guido</given-names>
+          </name>
+          <xref ref-type="aff" rid="A6">6</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Ó Tuama</surname>
+            <given-names>Éamonn</given-names>
+          </name>
+          <xref ref-type="aff" rid="A7">7</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Franz</surname>
+            <given-names>Nico</given-names>
+          </name>
+          <xref ref-type="aff" rid="A8">8</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Simov</surname>
+            <given-names>Kiril</given-names>
+          </name>
+          <xref ref-type="aff" rid="A2">2</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Stoev</surname>
+            <given-names>Pavel</given-names>
+          </name>
+          <uri content-type="orcid">https://orcid.org/0000-0002-5702-5677</uri>
+          <xref ref-type="aff" rid="A1">1</xref>
+          <xref ref-type="aff" rid="A9">9</xref>
+        </contrib>
+        <contrib contrib-type="author" corresp="no">
+          <name name-style="western">
+            <surname>Penev</surname>
+            <given-names>Lyubomir</given-names>
+          </name>
+          <uri content-type="orcid">https://orcid.org/0000-0002-2186-5033</uri>
+          <xref ref-type="aff" rid="A2">2</xref>
+          <xref ref-type="aff" rid="A10">10</xref>
+          <xref ref-type="aff" rid="A11">11</xref>
+        </contrib>
+      </contrib-group>
+      <aff id="A1">
+        <label>1</label>
+        <addr-line>Pensoft Publishers, Sofia, Bulgaria</addr-line>
+      </aff>
+      <aff id="A2">
+        <label>2</label>
+        <addr-line>Bulgarian Academy of Sciences, Sofia, Bulgaria</addr-line>
+      </aff>
+      <aff id="A3">
+        <label>3</label>
+        <addr-line>Pensoft, Sofia, Bulgaria</addr-line>
+      </aff>
+      <aff id="A4">
+        <label>4</label>
+        <addr-line>www.plazi.org, Bern, Switzerland</addr-line>
+      </aff>
+      <aff id="A5">
+        <label>5</label>
+        <addr-line>Columbia University, New York, United States of America</addr-line>
+      </aff>
+      <aff id="A6">
+        <label>6</label>
+        <addr-line>IPD Böhm, Karlsruhe Institute of Technology, Karlsruhe, Germany</addr-line>
+      </aff>
+      <aff id="A7">
+        <label>7</label>
+        <addr-line>Independent Researcher, Cork, Ireland</addr-line>
+      </aff>
+      <aff id="A8">
+        <label>8</label>
+        <addr-line>Arizona State University, Tempe, United States of America</addr-line>
+      </aff>
+      <aff id="A9">
+        <label>9</label>
+        <addr-line>National Museum of Natural History, Sofia, Bulgaria</addr-line>
+      </aff>
+      <aff id="A10">
+        <label>10</label>
+        <addr-line>Pensoft Publishers, Sofia, Bulgaria</addr-line>
+      </aff>
+      <aff id="A11">
+        <label>11</label>
+        <addr-line>Pensoft Publishers &amp; Bulgarian Academy of Sciences, Sofia, Bulgaria</addr-line>
+      </aff>
+      <author-notes>
+        <fn fn-type="corresp">
+          <p>Corresponding author: Viktor Senderov (<email xlink:type="simple">datascience@pensoft.net</email>).</p>
+        </fn>
+        <fn fn-type="edited-by">
+          <p>Academic editor: </p>
+        </fn>
+      </author-notes>
+      <pub-date pub-type="collection">
+        <year>2017</year>
+      </pub-date>
+      <pub-date pub-type="epub">
+        <day>07</day>
+        <month>08</month>
+        <year>2017</year>
+      </pub-date>
+      <issue>1</issue>
+      <elocation-id>e20084</elocation-id>
+      <history>
+        <date date-type="received">
+          <day>07</day>
+          <month>08</month>
+          <year>2017</year>
+        </date>
+      </history>
+      <permissions>
+        <copyright-statement>Viktor Senderov, Teodor Asenov Georgiev, Donat Agosti, Terry Catapano, Guido Sautter, Éamonn Ó Tuama, Nico Franz, Kiril Simov, Pavel Stoev, Lyubomir Penev</copyright-statement>
+        <license license-type="creative-commons-attribution" xlink:href="http://creativecommons.org/licenses/by/4.0" xlink:type="simple">
+          <license-p>This is an open access article distributed under the terms of the Creative Commons Attribution License 4.0 (CC-BY), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.</license-p>
+        </license>
+      </permissions>
+      <abstract>
+        <label>Abstract</label>
+        <p>We present <ext-link ext-link-type="uri" xlink:href="http://openbiodiv.net">OpenBiodiv</ext-link> - an implementation of the Open Biodiversity Knowledge Management System.</p>
+        <p>The need for an integrated information system serving the needs of the biodiversity community can be dated at least as far back as the sanctioning of the <ext-link ext-link-type="uri" xlink:href="http://www.bouchoutdeclaration.org">Bouchout declaration</ext-link> in 2007. The Bouchout declaration proposes to make biodiversity knowledge freely available as Linked Open Data (LOD)*<xref ref-type="fn" rid="FN3733772">1</xref>. At TDWG2016 Fig. <xref ref-type="fig" rid="F3735091">1</xref>) we presented the prototype of the sytem - then called Open Biodiversity Knolwedge Management Sysyttem (OBKMS). The specification and design of OpenBiodiv was outlined by <xref ref-type="bibr" rid="B3733736">Senderov and Penev (2016)</xref> and in this talk we would like to showcase its pilot. We believe OpenBiodiv is possibly the first pilot-stage implenatation of a semantic system running on top of the biodiversity knowledge graph.</p>
+        <p>OpenBiodiv has several components:</p>
+        <p><list list-type="order">
+          <list-item>
+            <p>OpenBiodiv ontology: general data model allowing the extraction of biodiversity knowledge from taxonomic articles or from databases such as GBIF. The ontology (in preparation, Journal of Biomedical Semantics, <ext-link ext-link-type="uri" xlink:href="https://github.com/pensoft/OpenBiodiv/tree/master/ontology/">available on GitHub</ext-link>) incorporates several pre-existing models: Darwin-SW (<xref ref-type="bibr" rid="B3733747">Baskauf and Webb 2016</xref>), SPAR (<xref ref-type="bibr" rid="B3733757">Peroni 2014</xref>), <ext-link ext-link-type="uri" xlink:href="https://github.com/plazi/TreatmentOntologies">Treatment Ontology</ext-link>, and several others. It defines classes, properties, and rules allowing to interlink these disparate ontologies and to create a LOD of biodiversity knowledge. New is the Taxonomic Name Usage class, accompanied by a Vocabulary of Taxonomic Statuses (created via an analysis of 4,000 Pensoft articles) allowing for the automated inference of the taxonomic status of Latinized scientific names. The ontology allows for multiple backbone taxonomies via the introduction of a Taxon Concept class (equivalent to DarwinCore Taxon) and Taxon Concept Labels as a subclass of biological name.</p>
+          </list-item>
+          <list-item>
+            <p>The Biodiversity Knowledge Graph - a LOD dataset of information extracted from taxonomic literature and databases. In practice, it has realized part of what has been proposed during <ext-link ext-link-type="uri" xlink:href="http://www.pro-ibiosphere.eu/">pro-iBiosphere </ext-link>and later discussed by <xref ref-type="bibr" rid="B3733797">Page (2016)</xref>. Its main resources are articles, sub-article componets (tables, figures, treatents, references), author names, institution names, geographical locations, biological names, taxon concepts, and occurrences. Authors have been disambiguated via their affiliation with the use of fuzzy-logic based on the <ext-link ext-link-type="uri" xlink:href="http://graphdb.ontotext.com/documentation/standard/lucene-graphdb-connector.html">GraphDB Lucene connector</ext-link>. The graph interlinks: (1) Prospectively published literature via <ext-link ext-link-type="uri" xlink:href="http://pensoft.net">Pensoft Publishers.</ext-link> (2) Legacy literature via <ext-link ext-link-type="uri" xlink:href="http://plazi.org">Plazi</ext-link>. (3) Well-known resources such as geographical places or institutions via <ext-link ext-link-type="uri" xlink:href="http://dbpedia.org">DBPedia.</ext-link> (4) GBIF's backbone taxonomy as a default but not preferential hierarchy of taxon concepts. (5) <ext-link ext-link-type="uri" xlink:href="http://zoobank.org">OpenBiodiv </ext-link>id's are matched to nomenclator id's (e.g. <ext-link ext-link-type="uri" xlink:href="http://zoobank.org">ZooBank)</ext-link> whenever possible. Names form two networks in the graph: (1) A directed-acyclical graph (DAG) of supercedence that can be followed to the corresponding sinks to infer the currently applicable scientific name for a given taxon. (2) A network of bi-directional relations indicating the relatedness of names. These names may be compared to the related names inferred on the basis of distributional semantics by the co-organizers of this workshop (<xref ref-type="bibr" rid="B3733827">Nguyen et al. 2017</xref>).</p>
+          </list-item>
+          <list-item>
+            <p>ropenbio: an R package for RDF*<xref ref-type="fn" rid="FN3733771">2</xref>-ization of biodiversity information resources according to the OpenBiodiv ontology. It will be submitted to the rOpenSci project. While many of its high-level functions are specific to OpenBiodiv, the low-level functions, and its RDF-ization framework can be used for any R-based RDF-ization effort.</p>
+          </list-item>
+          <list-item>
+            <p><ext-link ext-link-type="uri" xlink:href="http://openbiodiv.net">OpenBiodiv.net</ext-link>: a front-end of the system allowing users to run low-level SPARQL queries as well to use an extensible set of semantic apps running on top of the Biodiversity Knowledge Graph.</p>
+          </list-item>
+        </list></p>
+        <p>The talk will showcase the progress from prototype to pilot stage of the system since TDWG2016. It will focus on the new features and about the web UI allowing researchers and other interested parties to already use the system. We will discuss several possible scenarios including semantic search and finding related names.</p>
+      </abstract>
+      <kwd-group>
+        <label>Keywords</label>
+        <kwd>Linked Open Data</kwd>
+        <kwd>R package</kwd>
+        <kwd>RDF</kwd>
+        <kwd>SPARQL</kwd>
+        <kwd>Biodiversity Knowledge Graph</kwd>
+        <kwd>Semantic web</kwd>
+        <kwd>Semantic publishing</kwd>
+        <kwd>inferance</kwd>
+      </kwd-group>
+      <funding-group>
+        <award-group>
+          <funding-source>
+            <named-content content-type="project_title">BIG4 - Biosystematics, Informatics and Genetics of the big 4 insect groups: training tomorrow's researchers and entrepreneurs</named-content>
+            <named-content content-type="project_identifier">642241</named-content>
+            <named-content content-type="project_funder_id">501100000780</named-content>
+            <named-content content-type="project_funder_name">European Commission</named-content>
+            <named-content content-type="project_funder_doi">http://doi.org/10.13039/501100000780</named-content>
+          </funding-source>
+        </award-group>
+      </funding-group>
+      <conference>
+   <conf-date>1-6 October 2017</conf-date>
+   <conf-name>TDWG 2017 Annual Conference</conf-name>
+   <conf-acronym>TDWG 2017</conf-acronym>
+   <conf-loc>Ottawa, Canada</conf-loc>
+   <conf-theme>Data Integration in a Big Data Universe: Associating Occurrences with Genes, Phenotypes, and Environments</conf-theme>
+</conference>
+      <counts>
+        <fig-count count="1"/>
+        <table-count count="0"/>
+        <ref-count count="5"/>
+      </counts>
+    </article-meta>
+    <notes>
+      <sec sec-type="Presenting author">
+        <title>Presenting author</title>
+        <p>Viktor Senderov</p>
+      </sec>
+    </notes>
+  </front>
+  
+  <back>
+    <ref-list>
+      <title>References</title>
+      <ref id="B3733747">
+        <element-citation publication-type="article">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Baskauf</surname>
+              <given-names>Steven J.</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Webb</surname>
+              <given-names>Campbell O.</given-names>
+            </name>
+          </person-group>
+          <year>2016</year>
+          <article-title>Darwin-SW: Darwin Core-based terms for expressing biodiversity data as RDF</article-title>
+          <source>Semantic Web</source>
+          <volume>7</volume>
+          <issue>6</issue>
+          <fpage>629</fpage>
+          <lpage>643</lpage>
+          <uri>http://dx.doi.org/10.3233/sw-150203</uri>
+          <pub-id pub-id-type="doi">10.3233/sw-150203</pub-id>
+        </element-citation>
+      </ref>
+      <ref id="B3733827">
+        <element-citation publication-type="article">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Nguyen</surname>
+              <given-names>Nhung T. H.</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Soto</surname>
+              <given-names>Axel J.</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Kontonatsios</surname>
+              <given-names>Georgios</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Batista-Navarro</surname>
+              <given-names>Riza</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Ananiadou</surname>
+              <given-names>Sophia</given-names>
+            </name>
+          </person-group>
+          <year>2017</year>
+          <article-title>Constructing a biodiversity terminological inventory</article-title>
+          <source>PLOS ONE</source>
+          <volume>12</volume>
+          <issue>4</issue>
+          <fpage>e0175277</fpage>
+          <uri>http://dx.doi.org/10.1371/journal.pone.0175277</uri>
+          <pub-id pub-id-type="doi">10.1371/journal.pone.0175277</pub-id>
+        </element-citation>
+      </ref>
+      <ref id="B3733797">
+        <element-citation publication-type="article">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Page</surname>
+              <given-names>Roderic</given-names>
+            </name>
+          </person-group>
+          <year>2016</year>
+          <article-title>Towards a biodiversity knowledge graph</article-title>
+          <source>Research Ideas and Outcomes</source>
+          <volume>2</volume>
+          <fpage>e8767</fpage>
+          <uri>http://dx.doi.org/10.3897/rio.2.e8767</uri>
+          <pub-id pub-id-type="doi">10.3897/rio.2.e8767</pub-id>
+        </element-citation>
+      </ref>
+      <ref id="B3733757">
+        <element-citation publication-type="chapter">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Peroni</surname>
+              <given-names>Silvio</given-names>
+            </name>
+          </person-group>
+          <year>2014</year>
+          <chapter-title>The Semantic Publishing and Referencing Ontologies</chapter-title>
+          <source>Law, Governance and Technology Series</source>
+          <uri>http://dx.doi.org/10.1007/978-3-319-04777-5_5</uri>
+          <pub-id pub-id-type="doi">10.1007/978-3-319-04777-5_5</pub-id>
+        </element-citation>
+      </ref>
+      <ref id="B3733736">
+        <element-citation publication-type="article">
+          <person-group person-group-type="author">
+            <name name-style="western">
+              <surname>Senderov</surname>
+              <given-names>Viktor</given-names>
+            </name>
+            <name name-style="western">
+              <surname>Penev</surname>
+              <given-names>Lyubomir</given-names>
+            </name>
+          </person-group>
+          <year>2016</year>
+          <article-title>The Open Biodiversity Knowledge Management System in Scholarly Publishing</article-title>
+          <source>Research Ideas and Outcomes</source>
+          <volume>2</volume>
+          <fpage>e7757</fpage>
+          <uri>http://dx.doi.org/10.3897/rio.2.e7757</uri>
+          <pub-id pub-id-type="doi">10.3897/rio.2.e7757</pub-id>
+        </element-citation>
+      </ref>
+    </ref-list>
+    <fn-group>
+      <fn id="FN3733772">
+        <label>*1</label>
+        <p>LOD - Linked Open Data, the concept of interlinking data on the web introduced by Tim Berners-Lee, creator of the Web</p>
+      </fn>
+      <fn id="FN3733771">
+        <label>*2</label>
+        <p>RDF - Resource Description Framework, a simple semantic format of knowledge representation inspired from linguistics</p>
+      </fn>
+    </fn-group>
+  </back>
+  <floats-group>
+    <fig id="F3735091" position="float" orientation="portrait">
+      
+      <label>Figure 1.</label>
+      <caption>
+        <p>High-level Architecture of OpenBiodiv.</p>
+      </caption>
+      <graphic xlink:href="tdwgproceedings-01-e20084-g001.png" position="float" id="oo_148450.png" orientation="portrait" xlink:type="simple"/>
+    </fig>
+  </floats-group>
+</article>

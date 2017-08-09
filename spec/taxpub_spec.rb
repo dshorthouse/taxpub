@@ -247,6 +247,38 @@ describe "Taxpub", :include_helpers do
       end
     end
 
+    context "figures" do
+      it "outputs figures from a proceeding" do
+        figure = {
+          caption: "High-level Architecture of OpenBiodiv.",
+          graphic: {
+            href: "tdwgproceedings-01-e20084-g001.png", id: "oo_148450.png"
+          },
+          label: "Figure 1."
+        }
+        expect(parsed_proceedings_4_stub.figures.count).to eq(1)
+        expect(parsed_proceedings_4_stub.figures.first).to eq(figure)
+      end
+      it "output figures from a paper" do
+        caption = 'Palp of Longicoelotes geei sp. n., holotype male. '\
+        'A Prolateral view B Ventral view C Retrolateral view. CAT = '\
+        'anterior tip of conductor, CF = cymbial furrow, CO = conductor, '\
+        'CPT = posterior tip of conductor, E = embolus, EB = embolic base, '\
+        'MA = median apophysis, PA = patellar apophysis, ST = subtegulum, '\
+        'T = tegulum, TS = tegular sclerite, VTA = ventral tibial apophysis. '\
+        'Scale bar: equal for A, B, C.'
+        figure = {
+          caption: caption,
+          graphic: {
+            href: "zookeys-686-137-g001.jpg", id: "oo_146588.jpg"
+          },
+          label: "Figure 1."
+        }
+        expect(parsed_paper_stub.figures.count).to eq(6)
+        expect(parsed_paper_stub.figures.first).to eq(figure)
+      end
+    end
+
     context "references" do
       it "output no references from a proceeding if there aren't any" do
         references = []
