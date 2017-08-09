@@ -1,5 +1,7 @@
 require "taxpub/exceptions"
 require "taxpub/validator"
+require "taxpub/utils"
+require "taxpub/reference"
 require "taxpub/version"
 require "nokogiri"
 require "open-uri"
@@ -75,7 +77,7 @@ class Taxpub
   # Get the raw text content of the Nokogiri document
   #
   def content
-    clean_text(@doc.text)
+    Utils.clean_text(@doc.text)
   end
 
   ##
@@ -83,7 +85,7 @@ class Taxpub
   #
   def doi
     Validator.validate_nokogiri(@doc)
-    expand_doi(@doc.xpath("//*/article-meta/article-id[@pub-id-type='doi']").text)
+    Utils.expand_doi(@doc.xpath("//*/article-meta/article-id[@pub-id-type='doi']").text)
   end
 
   ##
@@ -92,7 +94,7 @@ class Taxpub
   def title
     Validator.validate_nokogiri(@doc)
     t = @doc.xpath("//*/article-meta/title-group/article-title").text
-    clean_text(t)
+    Utils.clean_text(t)
   end
 
   ##
@@ -101,7 +103,7 @@ class Taxpub
   def abstract
     Validator.validate_nokogiri(@doc)
     a = @doc.xpath("//*/article-meta/abstract").text
-    clean_text(a)
+    Utils.clean_text(a)
   end
 
   ##
@@ -110,7 +112,7 @@ class Taxpub
   def keywords
     Validator.validate_nokogiri(@doc)
     @doc.xpath("//*/article-meta/kwd-group/kwd")
-        .map{|a| clean_text(a.text)}
+        .map{|a| Utils.clean_text(a.text)}
   end
 
   ##
@@ -123,11 +125,11 @@ class Taxpub
       affiliations = []
       author.xpath("xref/@rid").each do |rid|
         xpath = "//*/aff[@id='#{rid}']/addr-line"
-        affiliations << clean_text(@doc.xpath(xpath).text)
+        affiliations << Utils.clean_text(@doc.xpath(xpath).text)
       end
       orcid = author.xpath("uri[@content-type='orcid']").text
-      given = clean_text(author.xpath("name/given-names").text)
-      surname = clean_text(author.xpath("name/surname").text)
+      given = Utils.clean_text(author.xpath("name/given-names").text)
+      surname = Utils.clean_text(author.xpath("name/surname").text)
       data << {
         given: given,
         surname: surname,
@@ -147,7 +149,7 @@ class Taxpub
     Validator.validate_nokogiri(@doc)
     xpath = "//*/subj-group[@subj-group-type='conference-part']/subject"
     coll = @doc.xpath(xpath).text
-    clean_text(coll)
+    Utils.clean_text(coll)
   end
 
   ##
@@ -157,7 +159,7 @@ class Taxpub
     Validator.validate_nokogiri(@doc)
     xpath = "//*/sec[@sec-type='Presenting author']/p"
     author = @doc.xpath(xpath).text
-    clean_text(author)
+    Utils.clean_text(author)
   end
 
   ##
@@ -166,7 +168,7 @@ class Taxpub
   def corresponding_author
     Validator.validate_nokogiri(@doc)
     xpath = "//*/author-notes/fn[@fn-type='corresp']/p"
-    author_string = clean_text(@doc.xpath(xpath).text)
+    author_string = Utils.clean_text(@doc.xpath(xpath).text)
     author_string.gsub("Corresponding author: ", "").chomp(".")
   end
 
@@ -192,6 +194,9 @@ class Taxpub
     names.to_a
   end
 
+  ##
+  # Get occurrences with dwc keys
+  #
   def occurrences
     Validator.validate_nokogiri(@doc)
     data = []
@@ -206,13 +211,16 @@ class Taxpub
     data
   end
 
+  ##
+  # Get the figures
+  #
   def figures
     Validator.validate_nokogiri(@doc)
     data = []
     @doc.xpath("//*/fig").each do |fig|
       data << {
-        label: clean_text(fig.xpath("label").text),
-        caption: clean_text(fig.xpath("caption").text),
+        label: Utils.clean_text(fig.xpath("label").text),
+        caption: Utils.clean_text(fig.xpath("caption").text),
         graphic: {
           href: fig.xpath("graphic").attribute("href").text,
           id: fig.xpath("graphic").attribute("id").text
@@ -228,87 +236,7 @@ class Taxpub
   def references
     Validator.validate_nokogiri(@doc)
     xpath = "//*/ref-list/ref"
-    @doc.xpath(xpath).map{ |r| parse_ref(r) }
-  end
-
-  private
-
-  def clean_text(text)
-    text.encode("UTF-8", :undef => :replace, :invalid => :replace, :replace => " ")
-        .gsub(/[[:space:]]/, " ")
-        .chomp(",")
-        .split
-        .join(" ")
-  end
-
-  def expand_doi(doi)
-    if doi[0..2] == "10."
-      doi.prepend("https://doi.org/")
-    end
-    doi
-  end
-
-  def authors_to_string(auths)
-    authors = auths.dup
-    return "" if authors.empty?
-    first = authors.first.values.join(", ")
-    authors.shift
-    remaining = authors.map{|a| a.values.reverse.join(" ")}.join(", ")
-    [first, remaining].reject(&:empty?).join(", ")
-  end
-
-  def parse_ref(ref)
-    ele = ref.at_xpath("element-citation") || ref.at_xpath("mixed-citation")
-
-    auths = []
-    ele.xpath("person-group/name").each do |name|
-      auths << { 
-        surname: name.xpath("surname").text,
-        given_names: name.xpath("given-names").text
-      }
-    end
-
-    institution = ele.xpath("institution").text
-    year = ele.xpath("year").text
-    title = ele.xpath("article-title").text.chomp(".")
-    source = ele.xpath("source").text.chomp(".")
-    volume = ele.xpath("volume").text
-    pages = [ele.xpath("fpage"), ele.xpath("lpage")].reject(&:empty?).join("–")
-
-    if ref.at_xpath("element-citation")
-      doi = expand_doi(ele.xpath("pub-id[@pub-id-type='doi']").text)
-      uri = ele.xpath("uri").text
-    end
-
-    if ref.at_xpath("mixed-citation")
-      doi = expand_doi(ele.xpath("ext-link[@ext-link-type='doi']").text)
-      uri = ele.xpath("ext-link[@ext-link-type='uri']").text
-    end
-
-    link = !doi.empty? ? doi : uri
-
-    {
-      title: title,
-      institution: institution,
-      authors: auths,
-      year: year,
-      source: source,
-      volume: volume,
-      pages: pages,
-      doi: doi,
-      uri: uri,
-      full_citation: [
-        institution,
-        authors_to_string(auths),
-        year,
-        title,
-        [
-          source,
-          [volume, pages].reject(&:empty?).join(": ")
-        ].reject(&:empty?).join(" "), 
-        link
-      ].reject(&:empty?).join(". ")
-    }
+    @doc.xpath(xpath).map{ |r| Reference.parse(r) }
   end
 
 end
