@@ -84,11 +84,11 @@ describe "Taxpub", :include_helpers do
 
     context "abstract" do
       it "outputs an abstract from a proceeding" do
-        abstract = "The Global Biodiversity Information Facility's 2017-2021"
+        abstract = "Abstract The Global Biodiversity Information Facility"
         expect(parsed_proceedings_stub.abstract).to start_with(abstract)
       end
       it "outputs an abstract from a paper" do
-        abstract = "A new Longicoeletes species is described from Jiangxi Province, China"
+        abstract = "Abstract A new Longicoeletes species is described from Jiangxi Province, China"
         expect(parsed_paper_stub.abstract).to start_with(abstract)
       end
     end
@@ -201,6 +201,49 @@ describe "Taxpub", :include_helpers do
         species = {:genus => "Longicoelotes", :species => "kulianganus"}
         expect(parsed_paper_stub.ranked_taxa.count).to eq(31)
         expect(parsed_paper_stub.ranked_taxa[3]).to eq(species)
+      end
+    end
+
+    context "occurrences" do
+      it "outputs occurrence records" do
+        occurrence = {
+          typeStatus: "Other material",
+          occurrenceDetails: "http://www.boldsystems.org/index.php/API_Public/specimen?ids=ASHYM1999-13",
+          catalogNumber: "DHJPAR0052645",
+          recordNumber: "13-SRNP-18822",
+          recordedBy: "Guillermo Pereira",
+          individualID: "DHJPAR0052645",
+          individualCount: "1",
+          sex: "male",
+          lifeStage: "adult",
+          scientificName: "Vibrissina albopicta",
+          nameAccordingTo: "(Bigot, 1889)",
+          phylum: "Arthropoda",
+          class: "Insecta",
+          order: "Diptera",
+          family: "Tachinidae",
+          genus: "Vibrissina",
+          specificEpithet: "albopicta",
+          scientificNameAuthorship: "(Bigot, 1889)",
+          continent: "Central America",
+          country: "Costa Rica",
+          stateProvince: "Guanacaste",
+          county: "Sector Santa Rosa",
+          locality: "Area de Conservación Guanacaste",
+          verbatimLocality: "Area Administrativa",
+          verbatimElevation: "295",
+          verbatimLatitude: "10.83764",
+          verbatimLongitude: "-85.61871",
+          verbatimCoordinateSystem: "decimal",
+          decimalLatitude: "10.8376",
+          decimalLongitude: "-85.6187",
+          identifiedBy: "A.J. Fleming",
+          samplingProtocol: "Reared from the larva of Durgoa mattogrossensis",
+          verbatimEventDate: "10-Aug-2013",
+          institutionCode: "CNC"
+        }
+        expect(parsed_paper_2_stub.occurrences.count).to eq(88)
+        expect(parsed_paper_2_stub.occurrences.first).to eq(occurrence)
       end
     end
 

@@ -72,6 +72,13 @@ class Taxpub
   end
 
   ##
+  # Get the raw text content of the Nokogiri document
+  #
+  def content
+    clean_text(@doc.text)
+  end
+
+  ##
   # Get the DOI
   #
   def doi
@@ -93,7 +100,7 @@ class Taxpub
   #
   def abstract
     Validator.validate_nokogiri(@doc)
-    a = @doc.xpath("//*/article-meta/abstract/p").text
+    a = @doc.xpath("//*/article-meta/abstract").text
     clean_text(a)
   end
 
@@ -102,7 +109,8 @@ class Taxpub
   #
   def keywords
     Validator.validate_nokogiri(@doc)
-    @doc.xpath("//*/article-meta/kwd-group/kwd").map(&:text)
+    @doc.xpath("//*/article-meta/kwd-group/kwd")
+        .map{|a| clean_text(a.text)}
   end
 
   ##
@@ -182,6 +190,20 @@ class Taxpub
       names.add(tp)
     end
     names.to_a
+  end
+
+  def occurrences
+    Validator.validate_nokogiri(@doc)
+    data = []
+    @doc.xpath("//*/list[@list-content='occurrences']/list-item").each do |occ|
+      obj = {}
+      occ.xpath("*/named-content").each do |dwc|
+        prefix = dwc.attributes["content-type"].text.gsub(/dwc\:/, "")
+        obj[prefix.to_sym] = dwc.text
+      end
+      data << obj
+    end
+    data
   end
 
   ##

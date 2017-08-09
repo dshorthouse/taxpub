@@ -31,4 +31,11 @@ module Helpers
     tps
   end
 
+  def parsed_paper_2_stub
+    tps = Taxpub.new
+    tps.file_path = File.join(__dir__, "files", "bdj.pensoft.net.xml")
+    tps.parse
+    tps
+  end
+
 end
