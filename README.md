@@ -16,10 +16,18 @@ Usage
 ```ruby
 require "taxpub"
 tp = TaxPub.new
-tp.url = "https://tdwgproceedings.pensoft.net/article/19829/download/xml/"
+tp.url = "https://zookeys.pensoft.net/article/12590/download/xml/"
 tp.parse
+tp.title
+=> "A review of the genus Lordiphosa Basden in India, with descriptions of four new species..."
 tp.doi
+=> "https://doi.org/10.3897/zookeys.688.12590"
 tp.references
+=> [{:title=>"Developmental constraints and convergent evolution in Drosophila sex comb formation...
+tp.authors
+=> [{:given=>"Rajendra S.", :surname=>"Fartyal", :fullname=>"Rajendra S. Fartyal,...
+tp.ranked_taxa
+=> [{:genus=>"Lordiphosa"}, {:order=>"Diptera"}, {:family=>"Drosophilidae"},...
 ```
 
 License
