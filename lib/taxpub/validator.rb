@@ -1,6 +1,6 @@
 require "uri"
 
-class Taxpub
+class TaxPub
   class Validator
 
     def self.validate_url(data)

@@ -1,4 +1,4 @@
-class Taxpub
+class TaxPub
   class Utils
 
     def self.clean_text(text)

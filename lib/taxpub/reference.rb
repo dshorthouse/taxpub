@@ -1,4 +1,4 @@
-class Taxpub
+class TaxPub
   class Reference
 
     def self.parse(ref)

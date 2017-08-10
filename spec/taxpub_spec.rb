@@ -2,8 +2,8 @@ RSpec.configure do |c|
   c.include Helpers, :include_helpers
 end
 
-describe "Taxpub", :include_helpers do
-  subject { Taxpub }
+describe "TaxPub", :include_helpers do
+  subject { TaxPub }
   let(:tps) { subject.new }
 
   describe ".version" do
@@ -14,7 +14,7 @@ describe "Taxpub", :include_helpers do
 
   describe ".new" do
     it "works" do
-      expect(tps).to be_kind_of Taxpub
+      expect(tps).to be_kind_of TaxPub
     end
   end
 

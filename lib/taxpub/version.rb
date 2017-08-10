@@ -1,4 +1,4 @@
-class Taxpub
+class TaxPub
   VERSION = "0.0.1"
 
   def self.version

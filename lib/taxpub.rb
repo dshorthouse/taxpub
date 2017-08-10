@@ -7,7 +7,7 @@ require "nokogiri"
 require "open-uri"
 require "set"
 
-class Taxpub
+class TaxPub
 
   def initialize
     @parameters = {}

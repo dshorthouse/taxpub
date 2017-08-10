@@ -4,11 +4,11 @@ require "taxpub/version"
 
 Gem::Specification.new do |s|
   s.name        = 'taxpub'
-  s.version     = Taxpub::VERSION
+  s.version     = TaxPub::VERSION
   s.license     = 'MIT'
   s.date        = '2017-07-25'
   s.summary     = "Parse TaxPub XML documents"
-  s.description = "Parses TaxPub XML documents and adds methods to pull out conference data"
+  s.description = "Parses TaxPub XML documents and adds methods to pull out conference data, ranked taxa, occurrences, references, etc."
   s.authors     = ["David P. Shorthouse"]
   s.email       = 'davidpshorthouse@gmail.coms'
   s.homepage    = 'https://github.com/dshorthouse/taxpub'

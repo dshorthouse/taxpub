@@ -1,18 +1,13 @@
 = taxpub
 
-WIP gem to parse TaxPub documents such as those produced by Pensoft Publishers, https://pensoft.net/.
+Ruby 2.4.1 gem to parse TaxPub documents like those produced by Pensoft Publishers, https://pensoft.net/.
 
 TaxPub Background: https://www.ncbi.nlm.nih.gov/books/NBK47081/
 
-== Building
-
-    $ gem build taxpub.gemspec
-    $ gem install taxpub-0.0.1.gem
-
-    $ irb
+== Usage
 
     > require "taxpub"
-    > tp = Taxpub.new
+    > tp = TaxPub.new
     > tp.url = "https://tdwgproceedings.pensoft.net/article/19829/download/xml/"
     > tp.parse
     > tp.doi
