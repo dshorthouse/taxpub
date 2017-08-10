@@ -77,6 +77,7 @@ class TaxPub
   # Get the raw text content of the Nokogiri document
   #
   def content
+    Validator.validate_nokogiri(@doc)
     Utils.clean_text(@doc.text)
   end
 

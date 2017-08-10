@@ -58,8 +58,3 @@ Copyright (c) 2017 Canadian Museum of Nature
 [9]: https://gemnasium.com/dshorthouse/taxpub
 [10]: https://img.shields.io/gem/dt/taxpub.svg
 [11]: https://rubygems.org/gems/taxpub
-
-
-
-
-
