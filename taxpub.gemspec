@@ -3,6 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "taxpub/version"
 
 Gem::Specification.new do |s|
+  s.required_ruby_version = '~> 2.4'
   s.name        = 'taxpub'
   s.version     = TaxPub::VERSION
   s.license     = 'MIT'
