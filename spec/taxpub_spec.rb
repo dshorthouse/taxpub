@@ -65,7 +65,7 @@ describe "TaxPub", :include_helpers do
         expect(parsed_paper_stub.doi).to eq(doi)
       end
       it "raises an Exception if the document is not yet parsed" do
-        tps = Taxpub.new
+        tps = TaxPub.new
         tps.file_path = File.join(__dir__, "files", "zookeys.pensoft.net.xml")
         expect{tps.doi}.to raise_error(subject::InvalidTypeError)
       end
