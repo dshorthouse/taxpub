@@ -55,6 +55,13 @@ describe "TaxPub", :include_helpers do
 
   describe "#parse" do
 
+    context "type" do
+      it "outputs the article type from a proceeding" do
+        type = "research-article"
+        expect(parsed_proceedings_stub.type).to eq(type)
+      end
+    end
+
     context "doi" do
       it "outputs a DOI from a proceeding" do
         doi = "https://doi.org/10.3897/tdwgproceedings.1.19829"
@@ -93,14 +100,21 @@ describe "TaxPub", :include_helpers do
       end
     end
 
-    context "presenting author" do
-      it "outputs the presenting author from a proceeding" do
-        presenting_author = "David Peter Shorthouse"
-        expect(parsed_proceedings_stub.presenting_author).to eq(presenting_author)
+    context "conference" do
+      it "outputs the conference data" do
+        conference = {
+          acronym: "TDWG 2017",
+          date: "1-6 October 2017",
+          location: "Ottawa, Canada",
+          name: "TDWG 2017 Annual Conference",
+          theme: "Data Integration in a Big Data Universe: Associating Occurrences with Genes, Phenotypes, and Environments",
+          session: "24 Other Oral Presentations",
+          presenter: "David Peter Shorthouse"
+        }
+        expect(parsed_proceedings_stub.conference).to eq(conference)
       end
-      it "outputs an empty presenting author from a paper" do
-        presenting_author = "David Peter Shorthouse"
-        expect(parsed_paper_stub.presenting_author).to be_empty
+      it "outputs empty conference data when none exist" do
+        expect(parsed_paper_stub.conference).to be_empty
       end
     end
 
@@ -112,17 +126,6 @@ describe "TaxPub", :include_helpers do
       it "outputs the corresponding author from a paper" do
         corresponding_author = "Zhe Zhao (zhaozhe@ioz.ac.cn)"
         expect(parsed_paper_stub.corresponding_author).to eq(corresponding_author)
-      end
-    end
-
-    context "conference part" do
-      it "outputs a conference part from a proceeding" do
-        collection = "24 Other Oral Presentations"
-        expect(parsed_proceedings_stub.conference_part).to eq(collection)
-      end
-      it "outputs a conference part from a paper" do
-        collection = "24 Other Oral Presentations"
-        expect(parsed_paper_stub.conference_part).to be_empty
       end
     end
 
@@ -192,15 +195,24 @@ describe "TaxPub", :include_helpers do
       end
     end
 
-    context "ranked taxa" do
-      it "output taxa from a proceeding" do
-        taxa = []
-        expect(parsed_proceedings_stub.ranked_taxa).to eq(taxa)
+    context "scientific names" do
+      it "outputs scientific names from a proceeding" do
       end
-      it "output taxa from a paper" do
-        species = {:genus => "Longicoelotes", :species => "kulianganus"}
-        expect(parsed_paper_stub.ranked_taxa.count).to eq(31)
-        expect(parsed_paper_stub.ranked_taxa[3]).to eq(species)
+      it "outputs taxa from a paper" do
+        expect(parsed_paper_stub.scientific_names[1]).to eq("Araneae")
+        expect(parsed_paper_stub.scientific_names.count).to eq(31)
+      end
+    end
+
+    context "scientific names with ranks" do
+      it "outputs scientific names with ranks from a proceeding" do
+        names = []
+        expect(parsed_proceedings_stub.scientific_names({with_ranks: true})).to eq(names)
+      end
+      it "outputs ranked taxa from a paper" do
+        name = {:genus => "Longicoelotes", :species => "kulianganus"}
+        expect(parsed_paper_stub.scientific_names({with_ranks: true}).count).to eq(31)
+        expect(parsed_paper_stub.scientific_names({with_ranks: true})[3]).to eq(name)
       end
     end
 

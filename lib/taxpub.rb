@@ -6,6 +6,7 @@ require "taxpub/version"
 require "nokogiri"
 require "open-uri"
 require "set"
+require "byebug"
 
 class TaxPub
 
@@ -64,6 +65,7 @@ class TaxPub
       @doc = File.open(file_path) { |f| Nokogiri::XML(f) }
     end
     Validator.validate_nokogiri(@doc)
+    @doc
   end
 
   ##
@@ -71,6 +73,12 @@ class TaxPub
   #
   def doc
     @doc
+  end
+
+  def type
+    Validator.validate_nokogiri(@doc)
+    xpath = "/article/@article-type"
+    @doc.xpath(xpath).text
   end
 
   ##
@@ -86,7 +94,8 @@ class TaxPub
   #
   def doi
     Validator.validate_nokogiri(@doc)
-    Utils.expand_doi(@doc.xpath("//*/article-meta/article-id[@pub-id-type='doi']").text)
+    xpath = "//*/article-meta/article-id[@pub-id-type='doi']"
+    Utils.expand_doi(@doc.xpath(xpath).text)
   end
 
   ##
@@ -94,7 +103,8 @@ class TaxPub
   #
   def title
     Validator.validate_nokogiri(@doc)
-    t = @doc.xpath("//*/article-meta/title-group/article-title").text
+    xpath = "//*/article-meta/title-group/article-title"
+    t = @doc.xpath(xpath).text
     Utils.clean_text(t)
   end
 
@@ -103,7 +113,8 @@ class TaxPub
   #
   def abstract
     Validator.validate_nokogiri(@doc)
-    a = @doc.xpath("//*/article-meta/abstract").text
+    xpath = "//*/article-meta/abstract"
+    a = @doc.xpath(xpath).text
     Utils.clean_text(a)
   end
 
@@ -112,7 +123,8 @@ class TaxPub
   #
   def keywords
     Validator.validate_nokogiri(@doc)
-    @doc.xpath("//*/article-meta/kwd-group/kwd")
+    xpath = "//*/article-meta/kwd-group/kwd"
+    @doc.xpath(xpath)
         .map{|a| Utils.clean_text(a.text)}
   end
 
@@ -122,7 +134,8 @@ class TaxPub
   def authors
     Validator.validate_nokogiri(@doc)
     data = []
-    @doc.xpath("//*/contrib[@contrib-type='author']").each do |author|
+    xpath = "//*/contrib[@contrib-type='author']"
+    @doc.xpath(xpath).each do |author|
       affiliations = []
       author.xpath("xref/@rid").each do |rid|
         xpath = "//*/aff[@id='#{rid}']/addr-line"
@@ -143,25 +156,6 @@ class TaxPub
     data
   end
 
-  ##
-  # Get the conference part of a proceeding
-  #
-  def conference_part
-    Validator.validate_nokogiri(@doc)
-    xpath = "//*/subj-group[@subj-group-type='conference-part']/subject"
-    coll = @doc.xpath(xpath).text
-    Utils.clean_text(coll)
-  end
-
-  ##
-  # Get the presenting author of a proceeding
-  #
-  def presenting_author
-    Validator.validate_nokogiri(@doc)
-    xpath = "//*/sec[@sec-type='Presenting author']/p"
-    author = @doc.xpath(xpath).text
-    Utils.clean_text(author)
-  end
 
   ##
   # Get the corresponding author
@@ -174,26 +168,43 @@ class TaxPub
   end
 
   ##
-  # Get the ranked taxa
+  # Get the conference metadata
   #
-  def ranked_taxa
+  def conference
     Validator.validate_nokogiri(@doc)
-    names = Set.new
-    @doc.xpath("//*//tp:taxon-name").each do |taxon|
-      tp = {}
-      taxon.children.each do |child|
-        next if !child.has_attribute?("taxon-name-part-type")
-        rank = child.attributes["taxon-name-part-type"].value.to_sym
-        if child.has_attribute?("reg")
-          tp[rank] = child.attributes["reg"].value
-        else
-          tp[rank] = child.text
-        end
-      end
-      names.add(tp)
-    end
-    names.to_a
+    xpath = "//*/conference"
+    conf = @doc.xpath(xpath)
+    return {} if conf.empty?
+    session_xpath = "//*/subj-group[@subj-group-type='conference-part']/subject"
+    session = Utils.clean_text(@doc.xpath(session_xpath).text)
+    presenter_xpath = "//*/sec[@sec-type='Presenting author']/p"
+    presenter = Utils.clean_text(@doc.xpath(presenter_xpath).text)
+    {
+      date: Utils.clean_text(conf.at_xpath("conf-date").text),
+      name: Utils.clean_text(conf.at_xpath("conf-name").text),
+      acronym: Utils.clean_text(conf.at_xpath("conf-acronym").text),
+      location: Utils.clean_text(conf.at_xpath("conf-loc").text),
+      theme: Utils.clean_text(conf.at_xpath("conf-theme").text),
+      session: session,
+      presenter: presenter
+    }
   end
+
+  ##
+  # Get the taxa
+  #
+  # == Attributes
+  #
+  # * +hsh+ - Hash { with_ranks: true } for scientific names returned with ranks as keys
+  #
+  def scientific_names(hsh = {})
+    if hsh[:with_ranks]
+      scientific_names_with_ranks
+    else
+      scientific_names_with_ranks.map{ |s| s.values.join(" ") }
+    end
+  end
+
 
   ##
   # Get occurrences with dwc keys
@@ -201,7 +212,8 @@ class TaxPub
   def occurrences
     Validator.validate_nokogiri(@doc)
     data = []
-    @doc.xpath("//*/list[@list-content='occurrences']/list-item").each do |occ|
+    xpath = "//*/list[@list-content='occurrences']/list-item"
+    @doc.xpath(xpath).each do |occ|
       obj = {}
       occ.xpath("*/named-content").each do |dwc|
         prefix = dwc.attributes["content-type"].text.gsub(/dwc\:/, "")
@@ -218,7 +230,8 @@ class TaxPub
   def figures
     Validator.validate_nokogiri(@doc)
     data = []
-    @doc.xpath("//*/fig").each do |fig|
+    xpath = "//*/fig"
+    @doc.xpath(xpath).each do |fig|
       data << {
         label: Utils.clean_text(fig.xpath("label").text),
         caption: Utils.clean_text(fig.xpath("caption").text),
@@ -238,6 +251,31 @@ class TaxPub
     Validator.validate_nokogiri(@doc)
     xpath = "//*/ref-list/ref"
     @doc.xpath(xpath).map{ |r| Reference.parse(r) }
+  end
+
+  private
+
+  ##
+  # Get the ranked taxa
+  #
+  def scientific_names_with_ranks
+    Validator.validate_nokogiri(@doc)
+    names = Set.new
+    xpath = "//*//tp:taxon-name"
+    @doc.xpath(xpath).each do |taxon|
+      tp = {}
+      taxon.children.each do |child|
+        next if !child.has_attribute?("taxon-name-part-type")
+        rank = child.attributes["taxon-name-part-type"].value.to_sym
+        if child.has_attribute?("reg")
+          tp[rank] = child.attributes["reg"].value
+        else
+          tp[rank] = child.text
+        end
+      end
+      names.add(tp)
+    end
+    names.to_a
   end
 
 end
