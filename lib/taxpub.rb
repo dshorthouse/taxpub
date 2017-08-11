@@ -6,7 +6,6 @@ require "taxpub/version"
 require "nokogiri"
 require "open-uri"
 require "set"
-require "byebug"
 
 class TaxPub
 
